@@ -1,0 +1,29 @@
+[
+    {
+        "title": "General",
+        "icon": "bi-gear-fill",
+        "childrens": [
+            {
+                "title": "Home",
+                "icon": "bi-house-fill",
+                "path": "home"
+            }       
+        ]
+    },
+
+    {
+        "title": "Advance",
+        "icon": "bi-view-list",
+        "childrens": [
+            {
+                "title": "Category",
+                "path": "/category"
+            },
+            {
+                "title": "Item-list",
+                "path": "/item-list"   
+            }
+        ]
+    }
+ 
+]

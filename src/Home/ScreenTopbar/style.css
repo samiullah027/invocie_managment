@@ -1,0 +1,24 @@
+/* TopBar.css */
+
+.topbar {
+  background-color: #8ee5ec;
+  color: #333;
+  width: 104%;
+  padding: 20px 20px;
+  width: 104%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  font-size: 24px;
+  padding-left: 24px;
+}
+
+.toggle-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
