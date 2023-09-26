@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import {
   Container,
@@ -8,18 +8,20 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
-import ItemList from "../ItemList";
+import List from "../List";
 
-const AddCategory = () => {
+const Add = () => {
   const [value, setValue] = useState("");
-  const [data, setData] = useState("");
-  console.log("value.---", value);
-  console.log("data.---", data);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
     const storedData = JSON.parse(localStorage.getItem("data2") || "[]");
     setData(storedData);
-  }, []);
+  };
 
   const handleSubmit = () => {
     if (!value) {
@@ -28,11 +30,11 @@ const AddCategory = () => {
     }
     const storedData = JSON.parse(localStorage.getItem("data2") || "[]");
     const newData = [...storedData, value];
-    setData(newData);
     localStorage.setItem("data2", JSON.stringify(newData));
-    setValue('');
+    setValue("");
+    getData();
   };
- 
+
   return (
     <Container>
       <Row className="addName">
@@ -49,11 +51,12 @@ const AddCategory = () => {
       </Row>
       <Row>
         <Col>
-          <Button className="btn-save"
+          <Button
+            className="btn-save"
             style={{
               marginLeft: "10rem",
               marginTop: "2rem",
-              marginBottom:"1rem",
+              marginBottom: "1rem",
               padding: "10px 20px",
               textAlign: "center",
             }}
@@ -63,9 +66,9 @@ const AddCategory = () => {
           </Button>
         </Col>
       </Row>
-      <ItemList  data={data || []} />
+      <List data={data} />
     </Container>
   );
 };
 
-export default AddCategory;
+export default Add;

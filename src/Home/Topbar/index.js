@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './style.css';
-
+import { useNavigate } from "react-router-dom";
 const TopBar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const hanleLogOut = () =>{
+    navigate("/");
+  }
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
     console.log('fddas');
@@ -21,7 +24,7 @@ const TopBar = () => {
           <li>Home</li>
           <li>About</li>
           <li>Contact US</li>
-          <li>log out</li>
+          <li onClick={hanleLogOut}>log out</li>
         </ul>
       )}
     </div>

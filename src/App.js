@@ -4,10 +4,11 @@ import { Routes, Route,useLocation } from "react-router-dom";
 import Home from "./Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from 'react-bootstrap/Container';
+import { ToastContainer } from "react-toastify";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import AddCategory from "./Screens/ItemCategory/AddCategory";
-import ItemList from "./Screens/ItemCategory/ItemList";
+import Add from "./Screens/ItemCategory/Add";
+import List from "./Screens/ItemCategory/List";
 import Crud from "./Home/Crud";
 import SideBar from "./Home/SideBar";
 import TopBar from "./Home/Topbar";
@@ -34,14 +35,12 @@ function App() {
       )}
         <Col md='10' lg='10'>
           <Routes>
-
             <Route path="Home" element={<Home />} />
-            <Route path="category" element={<AddCategory />} />
-            <Route path="item-list" element={<ItemList />} />
+            <Route path="category" element={<Add />} />
+            <Route path="item-list" element={<List />} />
             <Route path="crud" element={<Crud />} />
-            {/* <Route path="*" element={<p>no data</p>} /> */}
-
           </Routes>
+          <ToastContainer /> 
         </Col>
       </Row>
     </Container>

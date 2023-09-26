@@ -2,28 +2,31 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import { Button, Table } from "react-bootstrap";
 
-const DATA = 'data2'
-const RESET_INDEX = -1
+const DATA = "data2";
+const RESET_INDEX = -1;
 
-const ItemList = ({ data }) => {
+const List = ({ data }) => {
   const [mainData, setMainData] = useState([]);
-  const [editIndex, setEditIndex] = useState();
-  const [categoryName, setCategoryName] = useState();
+  console.log("mainData", mainData);
+  const [editIndex, setEditIndex] = useState(-1);
+  const [categoryName, setCategoryName] = useState("");
 
-  // useEffect(() => {
+  useEffect(() => {
+    let listData = data
+    if(!listData) {
+      listData = JSON.parse(localStorage.getItem("data2") || "[]");
+    }
+    setMainData(listData || []);
+  }, [data]);
 
-      // const storedData = localStorage.getItem(DATA) || [];
-      // console.log("storedDatastoredDatastoredData",storedData);
-      // const dataArray = JSON.parse(storedData);
-      // setMainData(dataArray);
-  // }, []);
 
   const handleDelete = (selectedIndex) => {
-    const result = mainData.filter((_, dataIndex) => dataIndex !== selectedIndex);
-    localStorage.setItem(DATA, JSON.stringify(result || []));
+    const result = mainData.filter((_, dataIndex) => dataIndex !== selectedIndex
+    );
+    localStorage.setItem(DATA, JSON.stringify(result));
     setMainData(result);
-  };
 
+  };
 
   const handleSave = (index) => {
     mainData[index] = categoryName;
@@ -33,9 +36,9 @@ const ItemList = ({ data }) => {
   };
 
   const handleEdit = (index) => {
-    setCategoryName(mainData[index])
-    setEditIndex(index)
-  }
+    setCategoryName(mainData[index]);
+    setEditIndex(index);
+  };
 
   return (
     <Table striped bordered hover>
@@ -47,7 +50,7 @@ const ItemList = ({ data }) => {
                 <input
                   type="text"
                   value={categoryName}
-                  onChange={event => setCategoryName(event.target.value)}
+                  onChange={(event) => setCategoryName(event.target.value)}
                 />
               ) : (
                 item
@@ -78,4 +81,4 @@ const ItemList = ({ data }) => {
   );
 };
 
-export default ItemList;
+export default List;

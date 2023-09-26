@@ -1,16 +1,26 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Toast } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
-
   const [values, setValues] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const options = {
+    autoClose: 2000,
+    className: "",
+    position: toast.POSITION.TOP_RIGHT,
+  };
+  const toastSuccess = (message) => {
+    toast.error(message, options);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,12 +35,11 @@ const SignUp = () => {
       localStorage.setItem("users", JSON.stringify(values));
       navigate("/home");
     } else {
-      alert ('password not match')
+      toastSuccess("Passwords do not match");
     }
   };
-console.log("required: values.password === values.confirmPasswordrequired: values.password === values.confirmPassword",values.password == values.confirmPassword);
   return (
-    <Container className="p-4 d-flex justify-content-center align-items-center h-100">
+    <Container className="p-5 d-flex justify-content-center align-items-center">
       <Form className="w-50" name="basic" onFinish={onFinish}>
         <h1 className="text-center">Sign Up</h1>
         <Form.Item
@@ -60,8 +69,14 @@ console.log("required: values.password === values.confirmPasswordrequired: value
             onChange={handleInputChange}
           />
         </Form.Item>
-        <Form.Item name="confirmPassword"
-          rules={[{ required: values.password !== values.confirmPassword, message: "password is not same" }]}
+        <Form.Item
+          name="confirmPassword"
+          rules={[
+            {
+              required: values.password !== values.confirmPassword,
+              message: "password is not same",
+            },
+          ]}
         >
           <Input
             placeholder="Confirm Password"
